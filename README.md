@@ -1,5 +1,4 @@
 # AS24-Backend
-## Repo to complete the task of AS24 backend
 ### How to run the project
 
 ### Todo
