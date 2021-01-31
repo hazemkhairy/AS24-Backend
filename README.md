@@ -5,7 +5,6 @@
 ### Todo
 - [X] Init the project.
 - [X] Create Endpoint to generate Requirment from the default CSV.
-- [ ] Provide Requirments in json Format.
-- [ ] Provide Requirments in CSV Format.
+- [X] Provide Requirments in json Format.
 - [ ] Create Endpoint to generate Requirment from the Uploaded CSV.
 - [ ] Validate the uploaded CSV.
