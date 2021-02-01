@@ -4,7 +4,7 @@
   "description": "- [ ] Init the project.\r - [ ] Create Endpoint to generate Requirment from the default CSV.\r - [ ] Provide Requirments in json Format.\r - [ ] Provide Requirments in CSV Format.\r - [ ] Create Endpoint to generate Requirment from the Uploaded CSV.\r - [ ] Validate the uploaded CSV.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
     "body-parser": "^1.19.0",
     "csv-parser": "^3.0.0",
     "express": "^4.17.1",
+    "jest": "^26.6.3",
     "multer": "^1.4.2",
     "nodemon": "^2.0.7"
   }

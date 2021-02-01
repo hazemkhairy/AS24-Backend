@@ -4,6 +4,13 @@ const fs = require('fs');
 const { isValidNumber, isValidAlphaNumeric } = require('./helperFunctions')
 const { basename } = require('path');
 const getData = async (listingsFilePath, contactsFilePath, validate = false) => {
+
+    if (!fs.existsSync(listingsFilePath)) {
+        return { valid: false, messages: ["Invalid listings.csv path"] }
+    }
+    if (!fs.existsSync(contactsFilePath)) {
+        return { valid: false, messages: ["Invalid contacts.csv path"] }
+    }
     if (validate) {
         let contactsValidation = await validateCSV(contactsFilePath, {
             'listing_id': isValidNumber,
