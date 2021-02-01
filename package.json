@@ -4,7 +4,8 @@
   "description": "- [ ] Init the project.\r - [ ] Create Endpoint to generate Requirment from the default CSV.\r - [ ] Provide Requirments in json Format.\r - [ ] Provide Requirments in CSV Format.\r - [ ] Create Endpoint to generate Requirment from the Uploaded CSV.\r - [ ] Validate the uploaded CSV.",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start":"node index.js"
   },
   "repository": {
     "type": "git",
