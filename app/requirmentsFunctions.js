@@ -92,7 +92,7 @@ const averagePriceOfTheMostContactedListings = async (listingsData, contactsData
         total += row.selling_price;
     }
     let avg = (Number(total / count)).toFixed(3);
-    return { report: { 'Average price': convertToMoney(avg) }, headers: ['Average price'] };
+    return { report: [{ 'Average price': convertToMoney(avg) }], headers: ['Average price'] };
 }
 
 const topMostContactedListingsPerMonth = async (listingsData, contactsData) => {
@@ -107,8 +107,8 @@ const topMostContactedListingsPerMonth = async (listingsData, contactsData) => {
     for await (const contact of contactsData) {
         let date = new Date(Number(contact['contact_date']));
         let month = (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
-
-        date = date.getFullYear().toString() + '.' + month;
+        //date in format year.month to sort then will invert
+        date = date.getFullYear().toString() + '.' + month; 
         if (!dates[date])
             dates[date] = { listingIDs: {} }
         if (!dates[date].listingIDs[contact['listing_id']])
@@ -154,11 +154,12 @@ const topMostContactedListingsPerMonth = async (listingsData, contactsData) => {
             })
         }
         return {
-            date: month.date,
+            //invert the date back to display in required format
+            date: month.date.split('.')[1] + '.' + month.date.split('.')[0],
             report: { report: temp, headers: headers }
         }
     })
-    return { report: monthsArray };
+    return { reports: monthsArray };
 }
 module.exports = {
     averageListingSellingPrice,

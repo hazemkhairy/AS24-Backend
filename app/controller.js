@@ -1,18 +1,49 @@
 const { getData } = require('./csvFunctions');
 const { averageListingSellingPrice, percentualDistributionByMake, averagePriceOfTheMostContactedListings, topMostContactedListingsPerMonth } = require('./requirmentsFunctions.js');
 
+const multer = require('multer')
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/');
+    },
+
+    // By default, multer removes file extensions so let's add them back
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+
 const generateReports = async (req, res) => {
     const body = req.body;
     let result = {};
-    if (body.useUploadedFiles) {
+    if (body.useDefault) {
         result = await getRequirments();
+        res.status(200).json({ ...result })
     }
     else {
         // pass the uploaded files path
-        result = await getRequirments();
+        let upload = multer({ storage: storage }).array('files', 2);
+
+        upload(req, res, async (err) => {
+            // req.file contains information of uploaded file
+            // req.body contains information of text fields, if there were any
+            if (!req.files) {
+                return res.status(401).send({ message: 'Please select an Files to upload' });
+            }
+            else if (err instanceof multer.MulterError) {
+                return res.status(404).send({ message: err });
+            }
+            else if (err) {
+                return res.status(404).send({ message: err });
+            }
+            result = await getRequirments(req.files[0].path, req.files[1].path, true)
+
+            res.status(200).json({ ...result })
+            // res.send({ code: 200, result: response });
+            // Display uploaded image for user validation
+        });
     }
 
-    res.status(200).json({ ...result })
 }
 const getRequirments = async (listingsFilePath = './app/default/listings.csv',
     contactsFilePath = './app/default/contacts.csv',
@@ -20,6 +51,8 @@ const getRequirments = async (listingsFilePath = './app/default/listings.csv',
     let listingsData, contactsData;
 
     let data = await getData(listingsFilePath, contactsFilePath, validate);
+    if (!data.valid)
+        return { valid: false, messages: data.messages };
     listingsData = data.listingsData;
     contactsData = data.contactsData;
 
