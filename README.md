@@ -13,6 +13,25 @@
 - Run the following Command on the CMD:
   - "npm install".
   - "npm test".
+### Documentation:
+- The backend consists of the following endpoint:
+  - /generateReport:
+    - Method type: POST
+    - Input: 
+      - {useDefault:true} to generate report from the default csv.
+      - FormData with contains two files :
+        - listing.csv.
+        - contacts.csv.
+    - Output: 
+      - If invalid format or there is any error the Response will contain object with the following:
+        - valid:false
+        - messages[String]=> the error message
+      - If valid Request, Response will contain the following:
+        - valid:true
+        - averageListingSellingPrice
+        - percentualDistributionByMake
+        - averagePriceOfTheMostContactedListings
+        - topMostContactedListingsPerMonth
 
 ### Todo
 - [X] Init the project.
