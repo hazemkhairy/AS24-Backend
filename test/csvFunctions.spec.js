@@ -41,7 +41,7 @@ describe("Testing CSV functions", () => {
                 ))
     })
     test("Test reading data from specific files with validating the files", async () => {
-        expect(await getData(__dirname + '/../uploads/listings.csv', __dirname + '/../uploads/contacts.csv', true))
+        expect(await getData(__dirname + '/csvValidFormat/listings.csv', __dirname + '/csvValidFormat/contacts.csv', true))
             .toEqual(
                 expect.objectContaining(
                     {
@@ -61,7 +61,7 @@ describe("Testing CSV functions", () => {
                 ))
     })
     test("Test reading data from invalid file path", async () => {
-        expect(await getData(__dirname + '/../app/defaults/listings.csv', __dirname + '/../app/defaults/contacts.csv', false))
+        expect(await getData(__dirname + '/../app/defaults/listings.csv', __dirname + '/../app/defaults/contacts.csv', true))
             .toEqual(
                 expect.objectContaining(
                     {
@@ -71,7 +71,7 @@ describe("Testing CSV functions", () => {
                 ))
     })
     test("Test reading data from invalid file format", async () => {
-        expect(await getData(__dirname + './csvInvalidFormat/listings.csv', __dirname + './csvInvalidFormat/contacts.csv', false))
+        expect(await getData(__dirname + '/csvInvalidFormat/listings.csv', __dirname + '/csvInvalidFormat/contacts.csv', true))
             .toEqual(
                 expect.objectContaining(
                     {
