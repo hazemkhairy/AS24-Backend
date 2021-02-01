@@ -3,7 +3,14 @@
 - Download the project.
 - Open CMD.
 - Navigate to the project directory using the CMD commands.
-- Run the following Command on the CMD: "node index.js"
+- Run the following Command on the CMD: "node index" or "nodemon index".
+
+### How to run tests of the project
+- Download the project.
+- Open CMD.
+- Navigate to the project directory using the CMD commands.
+- Run the following Command on the CMD: "npm test".
+
 ### Todo
 - [X] Init the project.
 - [X] Create Endpoint to generate Requirment from the default CSV.
