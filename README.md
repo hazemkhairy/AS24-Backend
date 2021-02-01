@@ -10,7 +10,9 @@
 - Download the project.
 - Open CMD.
 - Navigate to the project directory using the CMD commands.
-- Run the following Command on the CMD: "npm test".
+- Run the following Command on the CMD:
+  - "npm install".
+  - "npm test".
 
 ### Todo
 - [X] Init the project.
