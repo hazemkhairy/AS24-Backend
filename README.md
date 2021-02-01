@@ -3,8 +3,9 @@
 - Download the project.
 - Open CMD.
 - Navigate to the project directory using the CMD commands.
-- Run the following Command on the CMD: "node index" or "nodemon index".
-
+- Run the following Command on the CMD: 
+  - "npm install".
+  - "node index" or "nodemon index".
 ### How to run tests of the project
 - Download the project.
 - Open CMD.
