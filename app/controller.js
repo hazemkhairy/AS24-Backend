@@ -28,13 +28,13 @@ const generateReports = async (req, res) => {
             // req.file contains information of uploaded file
             // req.body contains information of text fields, if there were any
             if (!req.files) {
-                return res.status(401).send({ message: 'Please select an Files to upload' });
+                return res.status(401).send({ messages: ['Please select an Files to upload'] });
             }
             else if (err instanceof multer.MulterError) {
-                return res.status(404).send({ message: err });
+                return res.status(404).send({ messages: ['multer error'],errorInfo:[err] });
             }
             else if (err) {
-                return res.status(404).send({ message: err });
+                return res.status(404).send({ messages: ['unkown error'],errorInfo:[err] });
             }
             result = await getRequirments(req.files[0].path, req.files[1].path, true)
 
