@@ -31,14 +31,16 @@ const generateReports = async (req, res) => {
                 return res.status(401).send({ messages: ['Please select an Files to upload'] });
             }
             else if (err instanceof multer.MulterError) {
-                return res.status(404).send({ messages: ['multer error'],errorInfo:[err] });
+                return res.status(404).send({ messages: ['multer error'], errorInfo: [err] });
             }
             else if (err) {
-                return res.status(404).send({ messages: ['unkown error'],errorInfo:[err] });
+                return res.status(404).send({ messages: ['unkown error'], errorInfo: [err] });
             }
             result = await getRequirments(req.files[0].path, req.files[1].path, true)
-
-            res.status(200).json({ ...result })
+            if (result.valid)
+                res.status(200).json({ ...result })
+            else
+                res.status(404).json({ ...result });
             // res.send({ code: 200, result: response });
             // Display uploaded image for user validation
         });
@@ -61,7 +63,7 @@ const getRequirments = async (listingsFilePath = './app/default/listings.csv',
     requirements.percentualDistributionByMake = await percentualDistributionByMake(listingsData);
     requirements.averagePriceOfTheMostContactedListings = await averagePriceOfTheMostContactedListings(listingsData, contactsData);
     requirements.topMostContactedListingsPerMonth = await topMostContactedListingsPerMonth(listingsData, contactsData);
-    return requirements;
+    return {...requirements,valid:true};
 
 }
 

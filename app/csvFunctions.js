@@ -63,6 +63,8 @@ const validateCSV = async (filePath, validators) => {
                     messages.push(`File {${basename(filePath)}}.\nRecord #{${i}}.\nField {${key}} validation Failed`)
                 }
             }
+            if (messages.length)
+                break;
             i++;
         }
         return { valid: valid, messages: messages };
